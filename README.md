@@ -39,7 +39,4 @@ Plus **7 workflows** covering: writing from scratch, revising, abstract, introdu
 
 See the **Recommended Reading Order** section in SKILL.md for guidance on sequencing the workflows.
 
-## Related
 
-- `../candidates/` — Raw extractions (principles, frameworks, cases, glossary) from source books
-- `../verified.md` — Cross-reference of candidates → skill coverage
