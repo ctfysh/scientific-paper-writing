@@ -1,0 +1,126 @@
+{
+  "skill": "scientific-paper-writing",
+  "description": "Pressure tests for scientific paper writing skill. Tests whether the skill correctly activates for writing-related requests and correctly ignores non-writing requests.",
+  "tests": [
+    {
+      "id": "should-01",
+      "category": "should-trigger",
+      "prompt": "I have my experimental data ready. Can you help me write a paper for Nature Communications?",
+      "expected": true,
+      "rationale": "Clear request to write a paper from data — core use case"
+    },
+    {
+      "id": "should-02",
+      "category": "should-trigger",
+      "prompt": "Can you revise my abstract? I feel it doesn't capture the main finding well.",
+      "expected": true,
+      "rationale": "Abstract revision request — directly covered by Workflow 3"
+    },
+    {
+      "id": "should-03",
+      "category": "should-trigger",
+      "prompt": "Reviewer said my introduction is confusing. Can you help me restructure it?",
+      "expected": true,
+      "rationale": "Introduction restructuring — covered by Workflow 4"
+    },
+    {
+      "id": "should-04",
+      "category": "should-trigger",
+      "prompt": "帮我把这段论文的方法部分改得更清楚一些",
+      "expected": true,
+      "rationale": "Chinese request to improve methods section — should trigger via Chinese keywords"
+    },
+    {
+      "id": "should-05",
+      "category": "should-trigger",
+      "prompt": "I need to submit my paper next week. Can you do a final quality check on the structure and clarity?",
+      "expected": true,
+      "rationale": "Pre-submission quality check — uses strategy + craft layers"
+    },
+    {
+      "id": "should-06",
+      "category": "should-trigger",
+      "prompt": "My discussion section is weak. How can I better connect my findings to the broader field?",
+      "expected": true,
+      "rationale": "Discussion structure help — covered by strategic layer"
+    },
+    {
+      "id": "should-07",
+      "category": "should-trigger",
+      "prompt": "Can you check if my paper is written for the right audience? I'm submitting to a clinical journal but my background is in engineering.",
+      "expected": true,
+      "rationale": "Audience analysis — directly covered by strategic layer"
+    },
+    {
+      "id": "should-08",
+      "category": "should-trigger",
+      "prompt": "这个段落读起来很别扭，帮我改到适合投稿的水平",
+      "expected": true,
+      "rationale": "Chinese request to improve paragraph to submission quality — covers both strategy and craft"
+    },
+    {
+      "id": "bait-01",
+      "category": "should-not-trigger",
+      "prompt": "Can you create a figure from my data showing the correlation between temperature and reaction rate?",
+      "expected": false,
+      "rationale": "Figure creation — should trigger nature-figure, not this skill"
+    },
+    {
+      "id": "bait-02",
+      "category": "should-not-trigger",
+      "prompt": "我需要在论文里引用一些参考文献，帮我找找最近的相关工作",
+      "expected": false,
+      "rationale": "Reference/citation search — should trigger nature-citation, not this skill"
+    },
+    {
+      "id": "bait-03",
+      "category": "should-not-trigger",
+      "prompt": "Help me format my paper in LaTeX according to the journal template",
+      "expected": false,
+      "rationale": "Formatting/LaTeX — this skill handles content, not formatting"
+    },
+    {
+      "id": "bait-04",
+      "category": "should-not-trigger",
+      "prompt": "Reviewer asked me to respond to their comments. Can you help draft the response letter?",
+      "expected": false,
+      "rationale": "Reviewer response — should trigger nature-response, not this skill"
+    },
+    {
+      "id": "bait-05",
+      "category": "should-not-trigger",
+      "prompt": "Can you polish this paragraph to sound more natural? It sounds AI-generated.",
+      "expected": false,
+      "rationale": "AI-generated text polishing — should trigger humanizer, not this skill (this skill does strategic/craft audit, not de-AI-ing)"
+    },
+    {
+      "id": "boundary-01",
+      "category": "boundary",
+      "prompt": "Check the grammar and punctuation in my paper",
+      "expected": "partial",
+      "rationale": "Grammar check is within scope (Alley L2 + appendices cover grammar) but should not trigger full skill — should only activate the sentence-level audit"
+    },
+    {
+      "id": "boundary-02",
+      "category": "boundary",
+      "prompt": "帮我写一篇新闻报道关于这个研究成果",
+      "expected": "partial",
+      "rationale": "Writing a news report about research is adjacent but not scientific paper writing — skill boundaries say non-scientific writing should not trigger"
+    },
+    {
+      "id": "boundary-03",
+      "category": "boundary",
+      "prompt": "I need to write a grant proposal. Can your writing tips apply?",
+      "expected": "partial",
+      "rationale": "Grant proposals share principles (audience analysis, clarity) but have different conventions — some workflows apply, others don't"
+    }
+  ],
+  "metadata": {
+    "darwin-compatible": true,
+    "test-framework": "darwin-skill v2.0",
+    "total-tests": 16,
+    "should-trigger": 8,
+    "should-not-trigger": 5,
+    "boundary": 3
+  }
+}
